@@ -25,35 +25,7 @@ array( 'description' => __( 'Sidebar list of top products including previous and
 // Creating widget front-end
 public function widget( $args, $instance ) {
 $title = apply_filters( 'widget_title', $instance['title'] );
-$name =  $instance['name'];
-$url =  $instance['url'];
-$was =  $instance['was'];
-$now =  $instance['now'];
-$image =  $instance['image'];
 
-$name_2 =  $instance['name_2'];
-$url_2 =  $instance['url_2'];
-$was_2 =  $instance['was_2'];
-$now_2 =  $instance['now_2'];
-$image_2 =  $instance['image_2'];
-
-$name_3 =  $instance['name_3'];
-$url_3 =  $instance['url_3'];
-$was_3 =  $instance['was_3'];
-$now_3 =  $instance['now_3'];
-$image_3 =  $instance['image_3'];
-
-$name_4 =  $instance['name_4'];
-$url_4 =  $instance['url_4'];
-$was_4 =  $instance['was_4'];
-$now_4 =  $instance['now_4'];
-$image_4 =  $instance['image_4'];
-
-$name_5 =  $instance['name_5'];
-$url_5 =  $instance['url_5'];
-$was_5 =  $instance['was_5'];
-$now_5 =  $instance['now_5'];
-$image_5 =  $instance['image_5'];
 // before and after widget arguments are defined by themes
 echo $args['before_widget'];
 if ( ! empty( $title ) ){
@@ -63,13 +35,16 @@ if ( ! empty( $title ) ){
 $counter = 1;
 echo "<ul class='pat-tab'>";
 foreach ($instance as $value) {
-    echo "<li><div class='top-bargains-number'>$counter</div><a href='${'url_'. $counter}' target='_blank'><img class='sidebar-product-image' src='$image' alt='$name'></a><div class='product-container'><div class='product-link'><a href='$url' target='_blank'>$name</a></div><div class='old-price'>$was</div><div class='new-price'>$now</div></div></li>";
+	$current_url = $value['url'];
+	$current_image = $value['image'];
+	$current_name = $value['name'];
+	$current_was = $value['was'];
+	$current_now = $value['now'];
+
+
+    echo "<li><div class='top-bargains-number'>$counter</div><a href='$current_url' target='_blank'><img class='sidebar-product-image' src='$current_image' alt='$current_name'></a><div class='product-container'><div class='product-link'><a href='$current_url' target='_blank'>$current_name</a></div><div class='old-price'>$current_was</div><div class='new-price'>$current_now</div></div></li>";
+    $counter++;
 }
-echo "<li><div class='top-bargains-number'>1</div><a href='$url' target='_blank'><img class='sidebar-product-image' src='$image' alt='$name'></a><div class='product-container'><div class='product-link'><a href='$url' target='_blank'>$name</a></div><div class='old-price'>$was</div><div class='new-price'>$now</div></div></li>";
-echo "<li><div class='top-bargains-number'>2</div><a href='$url_2' target='_blank'><img class='sidebar-product-image' src='$image_2' alt='$name_2'></a><div class='product-container'><div class='product-link'><a href='$url_2' target='_blank'>$name_2</a></div><div class='old-price'>$was_2</div><div class='new-price'>$now_2</div></div></li>";
-echo "<li><div class='top-bargains-number'>3</div><a href='$url_3' target='_blank'><img class='sidebar-product-image' src='$image_3' alt='$name_3'></a><div class='product-container'><div class='product-link'><a href='$url_3' target='_blank'>$name_3</a></div><div class='old-price'>$was_3</div><div class='new-price'>$now_3</div></div></li>";
-echo "<li><div class='top-bargains-number'>4</div><a href='$url_4' target='_blank'><img class='sidebar-product-image' src='$image_4' alt='$name_4'></a><div class='product-container'><div class='product-link'><a href='$url_4' target='_blank'>$name_4</a></div><div class='old-price'>$was_4</div><div class='new-price'>$now_4</div></div></li>";
-echo "<li><div class='top-bargains-number'>5</div><a href='$url_5' target='_blank'><img class='sidebar-product-image' src='$image_5' alt='$name_5'></a><div class='product-container'><div class='product-link'><a href='$url_5' target='_blank'>$name_5</a></div><div class='old-price'>$was_5</div><div class='new-price'>$now_5</div></div></li>";
 echo "</ul>";
 // This is where you run the code and display the output
 //echo __( $title, 'wpb_widget_domain' );
@@ -78,37 +53,37 @@ echo $args['after_widget'];
 		
 // Widget Backend 
 public function form( $instance ) {
-if ( isset( $instance[ 'title' ] ) && isset ($instance[ 'url' ] ) && isset ($instance[ 'name' ] ) ) {
-$title = $instance[ 'title' ];
-$name = $instance[ 'name' ];
-$url = $instance[ 'url' ];
-$was = $instance[ 'was' ];
-$now = $instance[ 'now' ];
-$image = $instance[ 'image' ];
+if ( isset( $instance['item_1']) && isset ($instance['item_2'] ) && isset ($instance['item_3'] ) && isset ($instance['item_4'] ) && isset ($instance['item_5'] ) ) {
+$title = $instance['item_1'][ 'title' ];
+$name = $instance['item_1'][ 'name' ];
+$url = $instance['item_1'][ 'url' ];
+$was = $instance['item_1'][ 'was' ];
+$now = $instance['item_1'][ 'now' ];
+$image = $instance['item_1'][ 'image' ];
 
-$name_2 = $instance[ 'name_2' ];
-$url_2 = $instance[ 'url_2' ];
-$was_2 = $instance[ 'was_2' ];
-$now_2 = $instance[ 'now_2' ];
-$image_2 = $instance[ 'image_2' ];
+$name_2 = $instance['item_2'][ 'name' ];
+$url_2 = $instance['item_2'][ 'url' ];
+$was_2 = $instance['item_2'][ 'was' ];
+$now_2 = $instance['item_2'][ 'now' ];
+$image_2 = $instance['item_2'][ 'image' ];
 
-$name_3 = $instance[ 'name_3' ];
-$url_3 = $instance[ 'url_3' ];
-$was_3 = $instance[ 'was_3' ];
-$now_3 = $instance[ 'now_3' ];
-$image_3 = $instance[ 'image_3' ];
+$name_3 = $instance['item_3'][ 'name' ];
+$url_3 = $instance['item_3'][ 'url' ];
+$was_3 = $instance['item_3'][ 'was' ];
+$now_3 = $instance['item_3'][ 'now' ];
+$image_3 = $instance['item_3'][ 'image' ];
 
-$name_4 = $instance[ 'name_4' ];
-$url_4 = $instance[ 'url_4' ];
-$was_4 = $instance[ 'was_4' ];
-$now_4 = $instance[ 'now_4' ];
-$image_4 = $instance[ 'image_4' ];
+$name_4 = $instance['item_4'][ 'name' ];
+$url_4 = $instance['item_4'][ 'url' ];
+$was_4 = $instance['item_4'][ 'was' ];
+$now_4 = $instance['item_4'][ 'now' ];
+$image_4 = $instance['item_4'][ 'image' ];
 
-$name_5 = $instance[ 'name_5' ];
-$url_5 = $instance[ 'url_5' ];
-$was_5 = $instance[ 'was_5' ];
-$now_5 = $instance[ 'now_5' ];
-$image_5 = $instance[ 'image_5' ];
+$name_5 = $instance['item_5'][ 'name' ];
+$url_5 = $instance['item_5'][ 'url' ];
+$was_5 = $instance['item_5'][ 'was' ];
+$now_5 = $instance['item_5'][ 'now' ];
+$image_5 = $instance['item_5'][ 'image' ];
 }
 else {
 $title = __( 'New title', 'wpb_widget_domain' );
