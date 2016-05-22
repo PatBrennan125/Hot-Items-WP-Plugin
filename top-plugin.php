@@ -34,12 +34,12 @@ if ( ! empty( $title ) ){
 
 $counter = 1;
 echo "<ul class='pat-tab'>";
-foreach ($instance as $value) {
-	$current_url = $value['url'];
-	$current_image = $value['image'];
-	$current_name = $value['name'];
-	$current_was = $value['was'];
-	$current_now = $value['now'];
+foreach ($instance as $value => $key) {
+	$current_url = $key['url'];
+	$current_image = $key['image'];
+	$current_name = $key['name'];
+	$current_was = $key['was'];
+	$current_now = $key['now'];
 
 
     echo "<li><div class='top-bargains-number'>$counter</div><a href='$current_url' target='_blank'><img class='sidebar-product-image' src='$current_image' alt='$current_name'></a><div class='product-container'><div class='product-link'><a href='$current_url' target='_blank'>$current_name</a></div><div class='old-price'>$current_was</div><div class='new-price'>$current_now</div></div></li>";
