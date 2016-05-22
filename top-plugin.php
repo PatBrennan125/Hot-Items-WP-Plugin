@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Top Products
-Description: Sidebar list of top products
+Description: Sidebar list of top products including previous and current prices, image and link.
 */
 /* Start Adding Functions Below this Line */
 
@@ -18,12 +18,11 @@ parent::__construct(
 __('WPBeginner Widget', 'wpb_widget_domain'), 
 
 // Widget description
-array( 'description' => __( 'Sample widget based on WPBeginner Tutorial', 'wpb_widget_domain' ), ) 
+array( 'description' => __( 'Sidebar list of top products including previous and current prices, image and link.', 'wpb_widget_domain' ), ) 
 );
 }
 
 // Creating widget front-end
-// This is where the action happens
 public function widget( $args, $instance ) {
 $title = apply_filters( 'widget_title', $instance['title'] );
 $name =  $instance['name'];
@@ -60,7 +59,12 @@ echo $args['before_widget'];
 if ( ! empty( $title ) ){
 	echo $args['before_title'] . $title . $args['after_title'];
 }
+
+$counter = 1;
 echo "<ul class='pat-tab'>";
+foreach ($instance as $value) {
+    echo "<li><div class='top-bargains-number'>$counter</div><a href='${'url_'. $counter}' target='_blank'><img class='sidebar-product-image' src='$image' alt='$name'></a><div class='product-container'><div class='product-link'><a href='$url' target='_blank'>$name</a></div><div class='old-price'>$was</div><div class='new-price'>$now</div></div></li>";
+}
 echo "<li><div class='top-bargains-number'>1</div><a href='$url' target='_blank'><img class='sidebar-product-image' src='$image' alt='$name'></a><div class='product-container'><div class='product-link'><a href='$url' target='_blank'>$name</a></div><div class='old-price'>$was</div><div class='new-price'>$now</div></div></li>";
 echo "<li><div class='top-bargains-number'>2</div><a href='$url_2' target='_blank'><img class='sidebar-product-image' src='$image_2' alt='$name_2'></a><div class='product-container'><div class='product-link'><a href='$url_2' target='_blank'>$name_2</a></div><div class='old-price'>$was_2</div><div class='new-price'>$now_2</div></div></li>";
 echo "<li><div class='top-bargains-number'>3</div><a href='$url_3' target='_blank'><img class='sidebar-product-image' src='$image_3' alt='$name_3'></a><div class='product-container'><div class='product-link'><a href='$url_3' target='_blank'>$name_3</a></div><div class='old-price'>$was_3</div><div class='new-price'>$now_3</div></div></li>";
@@ -241,36 +245,36 @@ $title = __( 'New title', 'wpb_widget_domain' );
 // Updating widget replacing old instances with new
 public function update( $new_instance, $old_instance ) {
 $instance = array();
-$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-$instance['name'] = ( ! empty( $new_instance['name'] ) ) ? strip_tags( $new_instance['name'] ) : '';
-$instance['url'] = ( ! empty( $new_instance['url'] ) ) ? strip_tags( $new_instance['url'] ) : '';
-$instance['was'] = ( ! empty( $new_instance['was'] ) ) ? strip_tags( $new_instance['was'] ) : '';
-$instance['now'] = ( ! empty( $new_instance['now'] ) ) ? strip_tags( $new_instance['now'] ) : '';
-$instance['image'] = ( ! empty( $new_instance['image'] ) ) ? strip_tags( $new_instance['image'] ) : '';
+$instance['item_1']['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+$instance['item_1']['name'] = ( ! empty( $new_instance['name'] ) ) ? strip_tags( $new_instance['name'] ) : '';
+$instance['item_1']['url'] = ( ! empty( $new_instance['url'] ) ) ? strip_tags( $new_instance['url'] ) : '';
+$instance['item_1']['was'] = ( ! empty( $new_instance['was'] ) ) ? strip_tags( $new_instance['was'] ) : '';
+$instance['item_1']['now'] = ( ! empty( $new_instance['now'] ) ) ? strip_tags( $new_instance['now'] ) : '';
+$instance['item_1']['image'] = ( ! empty( $new_instance['image'] ) ) ? strip_tags( $new_instance['image'] ) : '';
 
-$instance['name_2'] = ( ! empty( $new_instance['name_2'] ) ) ? strip_tags( $new_instance['name_2'] ) : '';
-$instance['url_2'] = ( ! empty( $new_instance['url_2'] ) ) ? strip_tags( $new_instance['url_2'] ) : '';
-$instance['was_2'] = ( ! empty( $new_instance['was_2'] ) ) ? strip_tags( $new_instance['was_2'] ) : '';
-$instance['now_2'] = ( ! empty( $new_instance['now_2'] ) ) ? strip_tags( $new_instance['now_2'] ) : '';
-$instance['image_2'] = ( ! empty( $new_instance['image_2'] ) ) ? strip_tags( $new_instance['image_2'] ) : '';
+$instance['item_2']['name'] = ( ! empty( $new_instance['name_2'] ) ) ? strip_tags( $new_instance['name_2'] ) : '';
+$instance['item_2']['url'] = ( ! empty( $new_instance['url_2'] ) ) ? strip_tags( $new_instance['url_2'] ) : '';
+$instance['item_2']['was'] = ( ! empty( $new_instance['was_2'] ) ) ? strip_tags( $new_instance['was_2'] ) : '';
+$instance['item_2']['now'] = ( ! empty( $new_instance['now_2'] ) ) ? strip_tags( $new_instance['now_2'] ) : '';
+$instance['item_2']['image'] = ( ! empty( $new_instance['image_2'] ) ) ? strip_tags( $new_instance['image_2'] ) : '';
 
-$instance['name_3'] = ( ! empty( $new_instance['name_3'] ) ) ? strip_tags( $new_instance['name_3'] ) : '';
-$instance['url_3'] = ( ! empty( $new_instance['url_3'] ) ) ? strip_tags( $new_instance['url_3'] ) : '';
-$instance['was_3'] = ( ! empty( $new_instance['was_3'] ) ) ? strip_tags( $new_instance['was_3'] ) : '';
-$instance['now_3'] = ( ! empty( $new_instance['now_3'] ) ) ? strip_tags( $new_instance['now_3'] ) : '';
-$instance['image_3'] = ( ! empty( $new_instance['image_3'] ) ) ? strip_tags( $new_instance['image_3'] ) : '';
+$instance['item_3']['name'] = ( ! empty( $new_instance['name_3'] ) ) ? strip_tags( $new_instance['name_3'] ) : '';
+$instance['item_3']['url'] = ( ! empty( $new_instance['url_3'] ) ) ? strip_tags( $new_instance['url_3'] ) : '';
+$instance['item_3']['was'] = ( ! empty( $new_instance['was_3'] ) ) ? strip_tags( $new_instance['was_3'] ) : '';
+$instance['item_3']['now'] = ( ! empty( $new_instance['now_3'] ) ) ? strip_tags( $new_instance['now_3'] ) : '';
+$instance['item_3']['image'] = ( ! empty( $new_instance['image_3'] ) ) ? strip_tags( $new_instance['image_3'] ) : '';
 
-$instance['name_4'] = ( ! empty( $new_instance['name_4'] ) ) ? strip_tags( $new_instance['name_4'] ) : '';
-$instance['url_4'] = ( ! empty( $new_instance['url_4'] ) ) ? strip_tags( $new_instance['url_4'] ) : '';
-$instance['was_4'] = ( ! empty( $new_instance['was_4'] ) ) ? strip_tags( $new_instance['was_4'] ) : '';
-$instance['now_4'] = ( ! empty( $new_instance['now_4'] ) ) ? strip_tags( $new_instance['now_4'] ) : '';
-$instance['image_4'] = ( ! empty( $new_instance['image_4'] ) ) ? strip_tags( $new_instance['image_4'] ) : '';
+$instance['item_4']['name'] = ( ! empty( $new_instance['name_4'] ) ) ? strip_tags( $new_instance['name_4'] ) : '';
+$instance['item_4']['url'] = ( ! empty( $new_instance['url_4'] ) ) ? strip_tags( $new_instance['url_4'] ) : '';
+$instance['item_4']['was'] = ( ! empty( $new_instance['was_4'] ) ) ? strip_tags( $new_instance['was_4'] ) : '';
+$instance['item_4']['now'] = ( ! empty( $new_instance['now_4'] ) ) ? strip_tags( $new_instance['now_4'] ) : '';
+$instance['item_4']['image'] = ( ! empty( $new_instance['image_4'] ) ) ? strip_tags( $new_instance['image_4'] ) : '';
 
-$instance['name_5'] = ( ! empty( $new_instance['name_5'] ) ) ? strip_tags( $new_instance['name_5'] ) : '';
-$instance['url_5'] = ( ! empty( $new_instance['url_5'] ) ) ? strip_tags( $new_instance['url_5'] ) : '';
-$instance['was_5'] = ( ! empty( $new_instance['was_5'] ) ) ? strip_tags( $new_instance['was_5'] ) : '';
-$instance['now_5'] = ( ! empty( $new_instance['now_5'] ) ) ? strip_tags( $new_instance['now_5'] ) : '';
-$instance['image_5'] = ( ! empty( $new_instance['image_5'] ) ) ? strip_tags( $new_instance['image_5'] ) : '';
+$instance['item_5']['name'] = ( ! empty( $new_instance['name_5'] ) ) ? strip_tags( $new_instance['name_5'] ) : '';
+$instance['item_5']['url'] = ( ! empty( $new_instance['url_5'] ) ) ? strip_tags( $new_instance['url_5'] ) : '';
+$instance['item_5']['was'] = ( ! empty( $new_instance['was_5'] ) ) ? strip_tags( $new_instance['was_5'] ) : '';
+$instance['item_5']['now'] = ( ! empty( $new_instance['now_5'] ) ) ? strip_tags( $new_instance['now_5'] ) : '';
+$instance['item_5']['image'] = ( ! empty( $new_instance['image_5'] ) ) ? strip_tags( $new_instance['image_5'] ) : '';
 return $instance;
 }
 } // Class wpb_widget ends here
